@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Food Selection</title>
+
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    button {
+      margin-bottom: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    div {
+      margin-top: 20px;
+    }
+
+    #randomSelection {
+      background-color: #f2f2f2;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h3 {
+      color: #333;
+    }
+
+    p {
+      font-weight: bold;
+      font-size: 18px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+<button onclick="showRandomSelection('American')">American</button>
+<button onclick="showRandomSelection('Asian')">Asian</button>
+<button onclick="showRandomSelection('Fast Food')">Fast Food</button>
+<button onclick="showRandomSelection('Fine Dining')">Fine Dining</button>
+<button onclick="showRandomSelection('Indian')">Indian</button>
+<button onclick="showRandomSelection('Italian')">Italian</button>
+<button onclick="showRandomSelection('Mexican')">Mexican</button>
+<button onclick="showRandomSelection('Middle Eastern')">Middle Eastern</button>
+<button onclick="showRandomSelection('Salad')">Salad</button>
+
+<button onclick="pickAnything()">Pick Anything!</button>
+
+<div id="randomSelection"></div>
+
+<script>
+  function showRandomSelection(category) {
+    var options = getOptionsForCategory(category);
+
+    if (options.length > 0) {
+      var randomIndex = Math.floor(Math.random() * options.length);
+      var randomSelection = options[randomIndex];
+
+      var output = document.getElementById('randomSelection');
+      output.innerHTML = '<h3>Random Selection for ' + category + '</h3><p><a href="https://www.google.com/maps/search/' + encodeURIComponent(randomSelection) + '" target="_blank">' + randomSelection + '</a></p>';
+    } else {
+      alert('No options available for ' + category);
+    }
+  }
+
+  function getOptionsForCategory(category) {
+    switch (category) {
+      case 'Salad':
+        return ['Cava', 'Chopt'].sort();
+
+      case 'Mexican':
+        return ['Monterey', 'El Camino', 'Taqueria El Azteca'].sort();
+
+      case 'Asian':
+        return ['Phoenix', 'Sushi Republic', 'Kabutos', 'Flame Broiler', 'Tokyo Grill', 'Arigatos', 'Pho Hien Vuong'].sort();
+
+      case 'Italian':
+        return ['Salvinos', 'Bravos', 'Pastabilities', 'Cugino Forno-pizza'].sort();
+
+      case 'American':
+        return ['Jams Deli', 'Hops', 'Big Burger Spot', 'Lindley Filling Station', 'Dames Chicken and Waffles'].sort();
+
+      case 'Fast Food':
+        return ['Chipotle', 'Salsaritas'].sort();
+
+      case 'Fine Dining':
+        return ['Jeffery Adams', 'Bernadine’s', 'Greenvalley Grill', 'PrintWorks'].sort();
+
+      case 'Middle Eastern':
+        return ['Sarah’s Kabab Shop', 'Jerusalem Market'].sort();
+
+      case 'Indian':
+        return ['Tazza Bistro'].sort();
+
+      default:
+        return [];
+    }
+  }
+
+  function pickAnything() {
+    var allOptions = [];
+
+    // Collect options from all categories
+    allOptions = allOptions.concat(getOptionsForCategory('Salad'));
+    allOptions = allOptions.concat(getOptionsForCategory('Mexican'));
+    allOptions = allOptions.concat(getOptionsForCategory('Asian'));
+    allOptions = allOptions.concat(getOptionsForCategory('Italian'));
+    allOptions = allOptions.concat(getOptionsForCategory('American'));
+    allOptions = allOptions.concat(getOptionsForCategory('Fast Food'));
+    allOptions = allOptions.concat(getOptionsForCategory('Fine Dining'));
+    allOptions = allOptions.concat(getOptionsForCategory('Middle Eastern'));
+    allOptions = allOptions.concat(getOptionsForCategory('Indian'));
+
+    if (allOptions.length > 0) {
+      var randomIndex = Math.floor(Math.random() * allOptions.length);
+      var randomSelection = allOptions[randomIndex];
+
+      var output = document.getElementById('randomSelection');
+      output.innerHTML = '<h3>Random Selection from Any Category</h3><p><a href="https://www.google.com/maps/search/' + encodeURIComponent(randomSelection) + '" target="_blank">' + randomSelection + '</a></p>';
+    } else {
+      alert('No options available.');
+    }
+  }
+</script>
+
+</body>
+</html>
